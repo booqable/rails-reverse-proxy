@@ -61,8 +61,7 @@ module ReverseProxy
       target_request.basic_auth(options[:username], options[:password]) if options[:username] and options[:password]
 
       # Setup body
-      if target_request.request_body_permitted? \
-         && source_request.body
+      if source_request.body
         source_request.body.rewind
         target_request.body_stream = source_request.body
         target_request.content_length = source_request.content_length || 0
